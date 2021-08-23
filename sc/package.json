@@ -1,0 +1,19 @@
+{
+  "name": "sc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "concurrently -r -k --success first \"yarn hardhat node > nul\" \"wait-on http://127.0.0.1:8545 && yarn hardhat --network local run ./scripts/run.js\""
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "chai": "^4.3.4",
+    "concurrently": "^6.2.1",
+    "ethereum-waffle": "^3.4.0",
+    "ethers": "^5.4.5",
+    "hardhat": "^2.6.1",
+    "wait-on": "^6.0.0"
+  }
+}
