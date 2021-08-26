@@ -9,12 +9,16 @@ contract Custodian {
 
     event Deposited(
         address indexed _from,
-        uint256 _amount
+        uint256 _amount,
+        uint256 _blockNumber,
+        uint256 _timeStamp
     );
 
     event Withdrawn(
         address indexed _to,
-        uint256 _amount
+        uint256 _amount,
+        uint256 _blockNumber,
+        uint256 _timeStamp
     );
 
     constructor() {
@@ -27,7 +31,7 @@ contract Custodian {
     function deposit() external payable {
         balances[msg.sender] += msg.value;
         totalBalance += msg.value;
-        emit Deposited(msg.sender, msg.value);
+        emit Deposited(msg.sender, msg.value, block.number, block.timestamp);
     }
 
     function withdraw(uint256 _amount) external returns(bool) {
@@ -35,7 +39,7 @@ contract Custodian {
           msg.sender.transfer(_amount);
           balances[msg.sender] -= _amount;
           totalBalance -= _amount;
-          emit Withdrawn(msg.sender, _amount);
+          emit Withdrawn(msg.sender, _amount, block.number, block.timestamp);
           return true;
         } else {
           withdrawFailures += 1;
